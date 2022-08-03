@@ -1,0 +1,18 @@
+plugins {
+    id 'application'
+}
+
+group 'easy-json'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+apply plugin: 'java'
+
+dependencies {
+    implementation "com.fasterxml.jackson.core:jackson-core:2.13.0"
+    implementation "com.fasterxml.jackson.core:jackson-databind:2.13.0"
+    implementation 'org.apache.commons:commons-lang3:3.12.0'
+}
