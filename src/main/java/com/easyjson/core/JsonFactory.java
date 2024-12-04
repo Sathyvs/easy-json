@@ -40,8 +40,6 @@ public interface JsonFactory {
   /**
    * The order of the factory. If there is more than one matching factory they will be tried in ascending order.
    *
-   * @implSpec returns {@link Integer#MAX_VALUE}
-   *
    * @return  the order
    */
   default int order() {

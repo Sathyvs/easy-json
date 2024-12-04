@@ -11,6 +11,8 @@
 
 package com.easyjson.core;
 
+import java.util.concurrent.TimeUnit;
+
 /**
  * @author <a href="http://tfox.org">Tim Fox</a>
  */
@@ -23,8 +25,7 @@ public class Json {
 
   /**
    * Load the factory with the {@code ServiceLoader}, when no factory is found then a factory
-   * using Jackson will be returned.
-   * <br/>
+   * using Jackson will be returned. <br>
    * When {@code jackson-databind} is available then a codec using it will be used otherwise
    * the codec will only use {@code jackson-core} and provide best effort mapping.
    */

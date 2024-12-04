@@ -26,6 +26,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
+import java.util.concurrent.TimeUnit;
 import java.util.function.Function;
 import java.util.stream.Stream;
 
@@ -83,9 +84,9 @@ public class JsonObject implements Iterable<Map.Entry<String, Object>> {
   /**
    * Create a JsonObject from the fields of a Java object.
    * Faster than calling `new JsonObject(Json.encode(obj))`.
-   * <p/
+   * <p>
    * Returns {@code null} when {@code obj} is {@code null}.
-   *
+   * </p>
    * @param obj The object to convert to a JsonObject.
    * @throws IllegalArgumentException if conversion fails due to an incompatible type.
    */

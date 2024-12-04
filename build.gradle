@@ -1,18 +1,93 @@
 plugins {
-    id 'application'
+    id 'java-library'
+    id 'maven-publish'
+    id 'org.jreleaser' version '1.12.0'
 }
 
-group 'easy-json'
-version '1.0-SNAPSHOT'
+group 'io.github.sathyvs'
+version '1.1'
 
 repositories {
     mavenCentral()
 }
 
 apply plugin: 'java'
+apply plugin: 'maven-publish'
+apply plugin: 'signing'
+
+java {
+    sourceCompatibility = "1.8"
+    targetCompatibility = "1.8"
+    withJavadocJar()
+    withSourcesJar()
+}
 
 dependencies {
     implementation "com.fasterxml.jackson.core:jackson-core:2.13.0"
     implementation "com.fasterxml.jackson.core:jackson-databind:2.13.0"
     implementation 'org.apache.commons:commons-lang3:3.12.0'
 }
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
+            pom {
+                name = 'Easy Json'
+                description = 'Json library that provides easy usage of json data'
+                url = 'https://github.com/Sathyvs/easy-json'
+
+                licenses {
+                    license {
+                        name = 'The Apache License, Version 2.0'
+                        url = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                    }
+                }
+                developers {
+                    developer {
+                        id = 'Sathyvs'
+                        name = 'Sathiesh Veera'
+                        email = 'sathyvsk@gmail.com'
+                    }
+                    developer {
+                        id = 'madhuchavva'
+                        name = 'Madhu Chavva'
+                        email = 'madhu.chavva@gmail.com'
+                    }
+                }
+                scm {
+                    connection = 'scm:git:https://github.com/Sathyvs/easy-json.git'
+                    developerConnection = 'scm:git:ssh://git@github.com:Sathyvs/easy-json.git'
+                    url = 'https://github.com/Sathyvs/easy-json'
+                }
+            }
+        }
+    }
+    repositories {
+        maven {
+            url = layout.buildDirectory.dir('staging-deploy')
+        }
+    }
+}
+
+jreleaser {
+    signing {
+        active = 'ALWAYS'
+        armored = true
+        mode = 'FILE'
+        publicKey = '/Users/sathy/.gnupg/public.pgp'
+        secretKey = '/Users/sathy/.gnupg/private.pgp'
+    }
+    deploy {
+        maven {
+            mavenCentral {
+                sonatype {
+                    active = 'ALWAYS'
+                    url = 'https://central.sonatype.com/api/v1/publisher'
+                    stagingRepository('build/staging-deploy')
+                }
+            }
+        }
+    }
+}
+

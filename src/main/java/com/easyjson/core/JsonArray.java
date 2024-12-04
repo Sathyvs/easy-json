@@ -47,7 +47,7 @@ public class JsonArray implements Iterable<Object> {
 
   /**
    * Create an instance from a String of JSON, this string must be a valid array otherwise an exception will be thrown.
-   * <p/>
+   * <p>
    * If you are unsure of the value, you should use instead {@link Json#decodeValue(String)} and check the result is
    * a JSON array.
    *
